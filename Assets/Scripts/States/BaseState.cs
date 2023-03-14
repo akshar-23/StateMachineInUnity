@@ -11,13 +11,11 @@ public abstract class BaseState
     protected float gravity = -9.81f;
     protected float verticalVelocity;
 
-    public InputAction movementAction;
+
 
     public virtual void EnterState(StateManager player)
     {
-        player.controls = new InputControls();
-        player.controls.Enable();
-        movementAction = player.controls.Player.Movement;
+
     }
 
     public virtual void UpdateState(StateManager player)

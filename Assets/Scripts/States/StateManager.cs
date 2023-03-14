@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StateManager : MonoBehaviour
 {
     public CharacterController controller;
     public InputControls controls;
+
+    public InputAction movementAction;
+    public InputAction sprintAction;
 
     BaseState currentState;
     public WalkState walkState = new WalkState();
@@ -20,6 +24,13 @@ public class StateManager : MonoBehaviour
         currentState = idleState;
         controller = GetComponent<CharacterController>();
         currentState.EnterState(this);
+        controls = new InputControls();
+        controls.Enable();
+
+
+
+        movementAction = controls.Player.Movement;
+        sprintAction = controls.Player.Sprint;
     }
 
     // Update is called once per frame

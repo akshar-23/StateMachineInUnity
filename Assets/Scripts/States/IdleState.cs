@@ -15,10 +15,9 @@ public class IdleState : BaseState
     public override void UpdateState(StateManager player)
     {
         base.UpdateState(player);
-        Vector2 movementInput = movementAction.ReadValue<Vector2>();
 
         // switch the state to walking state if wasd movement detected
-        if (movementInput.magnitude > 0 )
+        if (player.movementAction.ReadValue<Vector2>().magnitude > 0 )
         {
             player.SwitchState(player.walkState);
         }
