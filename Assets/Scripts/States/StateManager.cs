@@ -10,11 +10,14 @@ public class StateManager : MonoBehaviour
     BaseState currentState;
     public WalkState walkState = new WalkState();
     public IdleState idleState = new IdleState();
+    public SprintState sprintState = new SprintState();
+    public CrouchState crouchState = new CrouchState();
+    public JumpState jumpState = new JumpState();
 
     // Start is called before the first frame update
     void Start()
     {
-        currentState = walkState;
+        currentState = idleState;
         controller = GetComponent<CharacterController>();
         currentState.EnterState(this);
     }

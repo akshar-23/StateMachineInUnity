@@ -13,9 +13,4 @@ public class JumpState : BaseState
     {
         base.UpdateState(player);
     }
-
-    public override void ExitState(StateManager player)
-    {
-
-    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
 public abstract class BaseState
@@ -10,7 +11,14 @@ public abstract class BaseState
     protected float gravity = -9.81f;
     protected float verticalVelocity;
 
-    public virtual void EnterState(StateManager player) { }
+    public InputAction movementAction;
+
+    public virtual void EnterState(StateManager player)
+    {
+        player.controls = new InputControls();
+        player.controls.Enable();
+        movementAction = player.controls.Player.Movement;
+    }
 
     public virtual void UpdateState(StateManager player)
     {
@@ -25,6 +33,4 @@ public abstract class BaseState
             verticalVelocity = 0f;
         }
     }
-
-    public virtual void ExitState(StateManager player) { }
 }

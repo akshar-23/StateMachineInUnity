@@ -5,20 +5,24 @@ using UnityEngine.InputSystem;
 
 public class SprintState : BaseState
 {
-    private InputAction sprintMovement;
+    private InputAction sprintAction;
+
     public override void EnterState(StateManager player)
     {
-        sprintMovement = player.controls.Player.Sprint;
+        player.controls = new InputControls();
+        player.controls.Enable();
+        sprintAction = player.controls.Player.Sprint;
     }
 
     public override void UpdateState(StateManager player)
     {
         base.UpdateState(player);
+        if(sprintAction.ReadValue<float>() > 0f)
+        {
+            Vector2 movementInput = player.controls.Player.Movement.ReadValue<Vector2>();
 
-    }
-
-    public override void ExitState(StateManager player)
-    {
-
+            Vector3 movement = new Vector3(movementInput.x, 0f, movementInput.y).normalized * sprintSpeed * Time.deltaTime;
+            player.controller.Move(player.transform.TransformDirection(movement));
+        }
     }
 }
