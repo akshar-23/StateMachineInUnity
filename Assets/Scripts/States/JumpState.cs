@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class JumpState : BaseState
+{
+    public override void EnterState(StateManager player)
+    {
+
+    }
+
+    public override void UpdateState(StateManager player)
+    {
+        base.UpdateState(player);
+    }
+
+    public override void ExitState(StateManager player)
+    {
+
+    }
+}
