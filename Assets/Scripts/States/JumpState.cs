@@ -11,6 +11,6 @@ public class JumpState : BaseState
 
     public override void UpdateState(StateManager player)
     {
-        base.UpdateState(player);
+        
     }
 }

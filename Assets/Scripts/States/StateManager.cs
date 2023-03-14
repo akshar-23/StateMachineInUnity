@@ -10,6 +10,8 @@ public class StateManager : MonoBehaviour
 
     public InputAction movementAction;
     public InputAction sprintAction;
+    public InputAction jumpAction;
+    public InputAction crouchAction;
 
     BaseState currentState;
     public WalkState walkState = new WalkState();
@@ -31,6 +33,8 @@ public class StateManager : MonoBehaviour
 
         movementAction = controls.Player.Movement;
         sprintAction = controls.Player.Sprint;
+        jumpAction = controls.Player.Jump;
+        crouchAction = controls.Player.Crouch;
     }
 
     // Update is called once per frame
