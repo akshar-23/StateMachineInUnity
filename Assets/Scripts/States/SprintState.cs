@@ -24,5 +24,11 @@ public class SprintState : BaseState
         {
             player.SwitchState(player.walkState);
         }
+
+        // switch the state to jump state if jump key is pressed
+        if (player.jumpAction.triggered)
+        {
+            player.SwitchState(player.jumpState);
+        }
     }
 }

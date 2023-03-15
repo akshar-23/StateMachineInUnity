@@ -27,5 +27,11 @@ public class IdleState : BaseState
         {
             player.SwitchState(player.crouchState);
         }
+
+        // switch the state to jump state if jump key is pressed
+        if (player.jumpAction.triggered)
+        {
+            player.SwitchState(player.jumpState);
+        }
     }
 }

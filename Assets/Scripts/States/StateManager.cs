@@ -20,6 +20,9 @@ public class StateManager : MonoBehaviour
     public CrouchState crouchState = new CrouchState();
     public JumpState jumpState = new JumpState();
 
+    public Vector3 lastMovementDirection;
+
+
     // Start is called before the first frame update
     void Start()
     {
