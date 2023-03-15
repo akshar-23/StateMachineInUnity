@@ -5,33 +5,30 @@ using UnityEngine.InputSystem;
 
 public class inputmanager : MonoBehaviour
 {
-
-    private InputControls playerInput;
-    private InputControls.PlayerActions player;
-
+    public Variables var;
     private playercam look;
 
     // Start is called before the first frame update
     void Awake()
     {
-        playerInput = new InputControls();
-        player = playerInput.Player;
+        var.controls = new InputControls();
+        var.player = var.controls.Player;
         look = GetComponent<playercam>();
     }
 
     // Update is called once per frame
     private void LateUpdate()
     {
-        look.ProcessLook(player.Look.ReadValue<Vector2>());
+        look.ProcessLook(var.player.Look.ReadValue<Vector2>());
     }
 
     private void OnEnable()
     {
-        player.Enable();
+        var.player.Enable();
     }
 
     private void OnDisable()
     {
-        player.Disable();
+        var.player.Disable();
     }
 }

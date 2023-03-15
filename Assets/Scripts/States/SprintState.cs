@@ -7,46 +7,43 @@ public class SprintState : BaseState
 {
     public override void EnterState(StateManager player)
     {
-        base.EnterState(player);
         Debug.Log("Sprint State Entered!");
     }
 
     public override void UpdateState(StateManager player)
     {
-        base.UpdateState(player);
+        Vector2 movementInput = player.var.movementAction.ReadValue<Vector2>();
 
-        Vector2 movementInput = player.movementAction.ReadValue<Vector2>();
+        player.var.verticalVelocity += player.var.gravity * Time.deltaTime;
 
-        verticalVelocity += player.var.gravity * Time.deltaTime;
-
-        Vector3 movement = new Vector3(movementInput.x, verticalVelocity * Time.deltaTime, movementInput.y).normalized * player.var.sprintSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(movementInput.x, player.var.verticalVelocity * Time.deltaTime, movementInput.y).normalized * player.var.sprintSpeed * Time.deltaTime;
         
-        player.controller.Move(player.transform.TransformDirection(movement));
+        player.var.controller.Move(player.transform.TransformDirection(movement));
 
-        if (player.controller.isGrounded && verticalVelocity < 0f)
+        if (player.var.controller.isGrounded && player.var.verticalVelocity < 0f)
         {
-            verticalVelocity = 0f;
+            player.var.verticalVelocity = 0f;
         }
 
-        if (player.sprintAction.ReadValue<float>() <= 0)
+        if (player.var.sprintAction.ReadValue<float>() <= 0)
         {
             player.SwitchState(player.walkState);
         }
 
         // switch the state to jump state if jump key is pressed
-        if (player.jumpAction.triggered && player.controller.isGrounded)
+        if (player.var.jumpAction.triggered && player.var.controller.isGrounded)
         {
             player.SwitchState(player.jumpState);
         }
 
         // switch to the slide state if crouch key is pressed while sprinting
-        if (player.crouchAction.triggered && player.controller.isGrounded)
+        if (player.var.crouchAction.triggered && player.var.controller.isGrounded)
         {
             player.SwitchState(player.slideState);
         }
 
         // switch to fall state
-        if (!(player.jumpAction.triggered) && !player.controller.isGrounded)
+        if (!(player.var.jumpAction.triggered) && !player.var.controller.isGrounded)
         {
             player.SwitchState(player.fallState);
         }
