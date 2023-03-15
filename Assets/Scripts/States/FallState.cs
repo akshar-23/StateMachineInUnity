@@ -10,7 +10,7 @@ public class FallState : BaseState
         base.EnterState(player);
         Debug.Log("Fall State Entered!");
 
-        movementDirection = new Vector3(player.movementAction.ReadValue<Vector2>().x, 0, player.movementAction.ReadValue<Vector2>().y).normalized * moveSpeed;
+        movementDirection = new Vector3(player.movementAction.ReadValue<Vector2>().x, 0, player.movementAction.ReadValue<Vector2>().y).normalized * player.var.moveSpeed;
 
         player.controller.Move(player.transform.TransformDirection(movementDirection) * Time.deltaTime);
     }
@@ -20,7 +20,7 @@ public class FallState : BaseState
         base.UpdateState(player);
 
         // apply gravity to the player
-        movementDirection.y += gravity * Time.deltaTime;
+        movementDirection.y += player.var.gravity * Time.deltaTime;
 
         // move the player based on the current jump velocity
         Vector3 movement = movementDirection * Time.deltaTime;

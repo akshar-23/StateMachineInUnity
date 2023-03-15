@@ -17,9 +17,9 @@ public class SprintState : BaseState
 
         Vector2 movementInput = player.movementAction.ReadValue<Vector2>();
 
-        verticalVelocity += gravity * Time.deltaTime;
+        verticalVelocity += player.var.gravity * Time.deltaTime;
 
-        Vector3 movement = new Vector3(movementInput.x, verticalVelocity * Time.deltaTime, movementInput.y).normalized * sprintSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(movementInput.x, verticalVelocity * Time.deltaTime, movementInput.y).normalized * player.var.sprintSpeed * Time.deltaTime;
         
         player.controller.Move(player.transform.TransformDirection(movement));
 

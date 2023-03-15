@@ -12,10 +12,10 @@ public class JumpState : BaseState
     {
         Debug.Log("Jump State Entered");
 
-        movementDirection = new Vector3(player.movementAction.ReadValue<Vector2>().x, 0, player.movementAction.ReadValue<Vector2>().y).normalized * moveSpeed;
+        movementDirection = new Vector3(player.movementAction.ReadValue<Vector2>().x, 0, player.movementAction.ReadValue<Vector2>().y).normalized * player.var.moveSpeed;
 
         // calculate the jump velocity based on jump height and gravity
-        jumpVelocity = Mathf.Sqrt(2 * jumpHeight * -gravity);
+        jumpVelocity = Mathf.Sqrt(2 * player.var.jumpHeight * -player.var.gravity);
         movementDirection.y = jumpVelocity;
 
         // apply the jump velocity to the player
@@ -27,7 +27,7 @@ public class JumpState : BaseState
         base.UpdateState(player);
 
         // apply gravity to the player
-        movementDirection.y += gravity * Time.deltaTime;
+        movementDirection.y += player.var.gravity * Time.deltaTime;
 
         // move the player based on the current jump velocity
         Vector3 movement = movementDirection * Time.deltaTime;

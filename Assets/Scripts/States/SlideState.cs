@@ -23,7 +23,7 @@ public class SlideState : BaseState
         base.UpdateState(player);
 
         // move the player in the slide direction
-        Vector3 movement = slideDirection * sprintSpeed * 2f * Time.deltaTime;
+        Vector3 movement = slideDirection * player.var.sprintSpeed * 2f * Time.deltaTime;
         player.controller.Move(player.transform.TransformDirection(movement));
 
         if (player.controller.isGrounded && verticalVelocity < 0f)
@@ -37,11 +37,5 @@ public class SlideState : BaseState
             player.transform.localScale = Vector3.one;
             player.SwitchState(player.sprintState);
         }
-
-/*        // switch to fall state
-        if (!(player.jumpAction.triggered) && !player.controller.isGrounded)
-        {
-            player.SwitchState(player.fallState);
-        }*/
     }
 }

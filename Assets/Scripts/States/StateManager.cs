@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class StateManager : MonoBehaviour
 {
+    public EnumVariables var;
     public CharacterController controller;
     public InputControls controls;
 

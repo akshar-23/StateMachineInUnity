@@ -15,7 +15,7 @@ public class IdleState : BaseState
     public override void UpdateState(StateManager player)
     {
         base.UpdateState(player);
-        verticalVelocity += gravity * Time.deltaTime;
+        verticalVelocity += player.var.gravity * Time.deltaTime;
 
         Vector3 movement = new Vector3(0, verticalVelocity * Time.deltaTime, 0).normalized * Time.deltaTime;
         player.controller.Move(player.transform.TransformDirection(movement));
