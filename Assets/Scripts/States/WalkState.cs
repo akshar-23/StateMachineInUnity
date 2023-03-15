@@ -26,8 +26,6 @@ public class WalkState : BaseState
 
         player.controller.Move(player.transform.TransformDirection(movement));
 
-
-
         if (player.controller.isGrounded && verticalVelocity < 0f)
         {
             verticalVelocity = 0f;

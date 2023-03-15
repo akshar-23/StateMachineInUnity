@@ -24,6 +24,7 @@ public class JumpState : BaseState
 
     public override void UpdateState(StateManager player)
     {
+        base.UpdateState(player);
 
         // apply gravity to the player
         movementDirection.y += gravity * Time.deltaTime;

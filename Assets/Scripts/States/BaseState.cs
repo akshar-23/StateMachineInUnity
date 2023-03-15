@@ -17,7 +17,7 @@ public abstract class BaseState
 
     public virtual void EnterState(StateManager player)
     {
-
+        
     }
 
     public virtual void UpdateState(StateManager player)

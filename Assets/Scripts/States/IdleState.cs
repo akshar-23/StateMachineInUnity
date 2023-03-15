@@ -20,6 +20,11 @@ public class IdleState : BaseState
         Vector3 movement = new Vector3(0, verticalVelocity * Time.deltaTime, 0).normalized * Time.deltaTime;
         player.controller.Move(player.transform.TransformDirection(movement));
 
+        if (player.controller.isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = 0f;
+        }
+
         // switch the state to walking state if wasd movement detected
         if (player.movementAction.ReadValue<Vector2>().magnitude > 0 && player.controller.isGrounded)
         {
