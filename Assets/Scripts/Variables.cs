@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnumVariables : MonoBehaviour
+public class Variables : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float sprintSpeed = 10f;
