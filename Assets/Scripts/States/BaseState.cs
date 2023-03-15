@@ -10,7 +10,7 @@ public abstract class BaseState
     protected float sprintSpeed = 10f;
     protected float gravity = -9.81f;
     protected float verticalVelocity;
-    protected float jumpHeight = 3f;
+    protected float jumpHeight = 1.5f;
 
 
 
