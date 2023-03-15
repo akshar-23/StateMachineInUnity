@@ -634,41 +634,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 974425785}
   movementAction:
-    m_Name: 
+    m_Name: Movement
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 753f759e-1719-4ec9-b990-723a282b4ef4
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
   sprintAction:
-    m_Name: 
+    m_Name: Sprint
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 94481ff1-5bc9-45eb-9136-3e08c348479f
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
   jumpAction:
-    m_Name: 
+    m_Name: Jump
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 051b19d4-d733-4f64-b7fb-141ddbad37c5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
   crouchAction:
-    m_Name: 
+    m_Name: Crouch
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: da89cb96-9fe3-49f6-9265-797298c3f02f
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  lastMovementDirection: {x: 0, y: 0, z: 0}
 --- !u!143 &974425785
 CharacterController:
   m_ObjectHideFlags: 0

@@ -7,14 +7,13 @@ public class CrouchState : BaseState
     public override void EnterState(StateManager player)
     {
         base.EnterState(player);
+        player.transform.localScale = Vector3.one * 0.5f;
         Debug.Log("Crouch State Entered!");
     }
 
     public override void UpdateState(StateManager player)
     {
         base.UpdateState(player);
-
-        player.transform.localScale = Vector3.one * 0.5f;
 
         Vector2 movementInput = player.movementAction.ReadValue<Vector2>();
 

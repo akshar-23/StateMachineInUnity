@@ -30,5 +30,11 @@ public class SprintState : BaseState
         {
             player.SwitchState(player.jumpState);
         }
+
+        // switch to the slide state if crouch key is pressed while sprinting
+        if (player.crouchAction.triggered)
+        {
+            player.SwitchState(player.slideState);
+        }
     }
 }

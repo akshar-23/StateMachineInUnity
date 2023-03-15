@@ -19,6 +19,7 @@ public class StateManager : MonoBehaviour
     public SprintState sprintState = new SprintState();
     public CrouchState crouchState = new CrouchState();
     public JumpState jumpState = new JumpState();
+    public SlideState slideState = new SlideState();
 
     public Vector3 lastMovementDirection;
 
