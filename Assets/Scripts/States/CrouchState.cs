@@ -17,23 +17,36 @@ public class CrouchState : BaseState
 
         Vector2 movementInput = player.movementAction.ReadValue<Vector2>();
 
-        Vector3 movement = new Vector3(movementInput.x, 0f, movementInput.y).normalized * moveSpeed * Time.deltaTime;
+        verticalVelocity += gravity * Time.deltaTime;
+
+        Vector3 movement = new Vector3(movementInput.x, verticalVelocity * Time.deltaTime, movementInput.y).normalized * moveSpeed * Time.deltaTime;
         player.controller.Move(player.transform.TransformDirection(movement));
 
-        if(player.crouchAction.ReadValue<float>() <= 0)
+        if (player.controller.isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = 0f;
+        }
+
+        if (player.crouchAction.ReadValue<float>() <= 0)
         {
             player.transform.localScale = Vector3.one;
 
             // switch to idle state
-            if (movementInput.magnitude <= 0f)
+            if (movementInput.magnitude <= 0f && player.controller.isGrounded)
             {
                 player.SwitchState(player.idleState);
             }
 
             // switch to walk state
-            if (player.movementAction.ReadValue<Vector2>().magnitude > 0)
+            if (player.movementAction.ReadValue<Vector2>().magnitude > 0 && player.controller.isGrounded)
             {
                 player.SwitchState(player.walkState);
+            }
+
+            // switch to fall state
+            if (!(player.jumpAction.triggered) && !player.controller.isGrounded)
+            {
+                player.SwitchState(player.fallState);
             }
         }
     }

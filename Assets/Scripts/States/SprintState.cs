@@ -17,8 +17,16 @@ public class SprintState : BaseState
 
         Vector2 movementInput = player.movementAction.ReadValue<Vector2>();
 
-        Vector3 movement = new Vector3(movementInput.x, 0f, movementInput.y).normalized * sprintSpeed * Time.deltaTime;
+        verticalVelocity += gravity * Time.deltaTime;
+
+        Vector3 movement = new Vector3(movementInput.x, verticalVelocity * Time.deltaTime, movementInput.y).normalized * sprintSpeed * Time.deltaTime;
+        
         player.controller.Move(player.transform.TransformDirection(movement));
+
+        if (player.controller.isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = 0f;
+        }
 
         if (player.sprintAction.ReadValue<float>() <= 0)
         {
@@ -26,15 +34,21 @@ public class SprintState : BaseState
         }
 
         // switch the state to jump state if jump key is pressed
-        if (player.jumpAction.triggered)
+        if (player.jumpAction.triggered && player.controller.isGrounded)
         {
             player.SwitchState(player.jumpState);
         }
 
         // switch to the slide state if crouch key is pressed while sprinting
-        if (player.crouchAction.triggered)
+        if (player.crouchAction.triggered && player.controller.isGrounded)
         {
             player.SwitchState(player.slideState);
+        }
+
+        // switch to fall state
+        if (!(player.jumpAction.triggered) && !player.controller.isGrounded)
+        {
+            player.SwitchState(player.fallState);
         }
     }
 }

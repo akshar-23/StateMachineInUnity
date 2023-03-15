@@ -26,11 +26,22 @@ public class SlideState : BaseState
         Vector3 movement = slideDirection * sprintSpeed * 2f * Time.deltaTime;
         player.controller.Move(player.transform.TransformDirection(movement));
 
+        if (player.controller.isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = 0f;
+        }
+
         // check if the slide duration is over and switch back to the sprint state
         if (Time.time - slideStartTime >= slideDuration)
         {
             player.transform.localScale = Vector3.one;
             player.SwitchState(player.sprintState);
         }
+
+/*        // switch to fall state
+        if (!(player.jumpAction.triggered) && !player.controller.isGrounded)
+        {
+            player.SwitchState(player.fallState);
+        }*/
     }
 }

@@ -14,6 +14,7 @@ public abstract class BaseState
 
 
 
+
     public virtual void EnterState(StateManager player)
     {
 
@@ -21,15 +22,6 @@ public abstract class BaseState
 
     public virtual void UpdateState(StateManager player)
     {
-        verticalVelocity += gravity * Time.deltaTime;
-
-        // move the character based on the current vertical velocity
-        Vector3 movement = Vector3.up * verticalVelocity * Time.deltaTime;
-        player.controller.Move(movement);
-
-        if (player.controller.isGrounded && verticalVelocity < 0f)
-        {
-            verticalVelocity = 0f;
-        }
+        
     }
 }
