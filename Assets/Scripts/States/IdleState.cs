@@ -21,5 +21,11 @@ public class IdleState : BaseState
         {
             player.SwitchState(player.walkState);
         }
+
+        // switch the state to crouch state if crouch key is pressed
+        if (player.crouchAction.ReadValue<float>() > 0)
+        {
+            player.SwitchState(player.crouchState);
+        }
     }
 }

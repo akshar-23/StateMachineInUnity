@@ -29,9 +29,16 @@ public class WalkState : BaseState
             player.sprintAction.Disable();
         }
 
+        // switch to sprint state
         if(player.sprintAction.ReadValue<float>() > 0)
         {
             player.SwitchState(player.sprintState);
+        }
+
+        // switch to crouch state
+        if (player.crouchAction.ReadValue<float>() > 0)
+        {
+            player.SwitchState(player.crouchState);
         }
     }
 }

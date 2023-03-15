@@ -21,6 +21,7 @@ public abstract class BaseState
 
     public virtual void UpdateState(StateManager player)
     {
+        Debug.Log(player.crouchAction.ReadValue<float>());
         verticalVelocity += gravity * Time.deltaTime;
 
         // move the character based on the current vertical velocity
