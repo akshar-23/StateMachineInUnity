@@ -16,19 +16,16 @@ public class StateManager : MonoBehaviour
     public FallState fallState = new FallState();
 
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
         currentState = idleState;
         Variables.controller = GetComponent<CharacterController>();
-        
-        
-        currentState.EnterState(this);
-        
-        
+
+
+        currentState.player = this;
+        currentState.EnterState();
+
         Variables.controls = new InputControls();
         Variables.controls.Enable();
 
@@ -43,6 +40,7 @@ public class StateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentState.UpdateState(this);
+        currentState.player = this;
+        currentState.UpdateState();
     }
 }

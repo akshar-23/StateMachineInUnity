@@ -6,19 +6,17 @@ using UnityEngine.InputSystem.XR;
 
 public class WalkState : BaseState
 {
-    public override void EnterState(StateManager player)
+    public override void EnterState()
     {
         Debug.Log("Walk State Entered!");
         Variables.sprintAction.Enable();
     }
 
-    public override void UpdateState(StateManager player)
+    public override void UpdateState()
     {
-        Vector2 movementInput = Variables.movementAction.ReadValue<Vector2>();
-
         Variables.verticalVelocity += Variables.gravity * Time.deltaTime;
 
-        Vector3 movement = new Vector3(movementInput.x, Variables.verticalVelocity * Time.deltaTime, movementInput.y).normalized * Variables.moveSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(Variables.movementAction.ReadValue<Vector2>().x, Variables.verticalVelocity * Time.deltaTime, Variables.movementAction.ReadValue<Vector2>().y).normalized * Variables.moveSpeed * Time.deltaTime;
 
 
         Variables.controller.Move(player.transform.TransformDirection(movement));
@@ -28,44 +26,50 @@ public class WalkState : BaseState
             Variables.verticalVelocity = 0f;
         }
 
+        player.currentState.SwitchState();
+    }
 
+    public override void SwitchState()
+    {
         // switch the state to idle state if wasd movement not detected
-        if (movementInput.magnitude <= 0f && Variables.controller.isGrounded)
+        if (Variables.movementAction.ReadValue<Vector2>().magnitude <= 0f && Variables.controller.isGrounded)
         {
-            SwitchState(player, player.idleState);
+            player.currentState.ExitState();
+            player.currentState = player.idleState;
+            player.currentState.EnterState();
             Variables.sprintAction.Disable();
         }
 
         // switch to sprint state
         if (Variables.sprintAction.ReadValue<float>() > 0 && Variables.controller.isGrounded)
         {
-            SwitchState(player, player.sprintState);
+            player.currentState.ExitState();
+            player.currentState = player.sprintState;
+            player.currentState.EnterState();
         }
 
         // switch to crouch state
         if (Variables.crouchAction.ReadValue<float>() > 0 && Variables.controller.isGrounded)
         {
-            SwitchState(player, player.crouchState);
+            player.currentState.ExitState();
+            player.currentState = player.crouchState;
+            player.currentState.EnterState();
         }
 
         // switch the state to jump state if jump key is pressed
         if (Variables.jumpAction.triggered && Variables.controller.isGrounded)
         {
-            SwitchState(player, player.jumpState);
+            player.currentState.ExitState();
+            player.currentState = player.jumpState;
+            player.currentState.EnterState();
         }
 
         // switch to fall state
         if (!(Variables.jumpAction.triggered) && !Variables.controller.isGrounded)
         {
-            SwitchState(player, player.fallState);
+            player.currentState.ExitState();
+            player.currentState = player.fallState;
+            player.currentState.EnterState();
         }
-
-    }
-
-    public override void SwitchState(StateManager player, BaseState newState)
-    {
-        player.currentState.ExitState(player);
-        player.currentState = newState;
-        player.currentState.EnterState(player);
     }
 }

@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 public class SprintState : BaseState
 {
-    public override void EnterState(StateManager player)
+    public override void EnterState()
     {
         Debug.Log("Sprint State Entered!");
     }
 
-    public override void UpdateState(StateManager player)
+    public override void UpdateState()
     {
         Vector2 movementInput = Variables.movementAction.ReadValue<Vector2>();
 
@@ -25,34 +25,40 @@ public class SprintState : BaseState
             Variables.verticalVelocity = 0f;
         }
 
+        player.currentState.SwitchState();
+    }
+
+    public override void SwitchState()
+    {
         if (Variables.sprintAction.ReadValue<float>() <= 0)
         {
-            SwitchState(player, player.walkState);
+            player.currentState.ExitState();
+            player.currentState = player.walkState;
+            player.currentState.EnterState();
         }
 
         // switch the state to jump state if jump key is pressed
         if (Variables.jumpAction.triggered && Variables.controller.isGrounded)
         {
-            SwitchState(player, player.jumpState);
+            player.currentState.ExitState();
+            player.currentState = player.jumpState;
+            player.currentState.EnterState();
         }
 
         // switch to the slide state if crouch key is pressed while sprinting
         if (Variables.crouchAction.triggered && Variables.controller.isGrounded)
         {
-            SwitchState(player, player.slideState);
+            player.currentState.ExitState();
+            player.currentState = player.slideState;
+            player.currentState.EnterState();
         }
 
         // switch to fall state
         if (!(Variables.jumpAction.triggered) && !Variables.controller.isGrounded)
         {
-            SwitchState(player, player.fallState);
+            player.currentState.ExitState();
+            player.currentState = player.fallState;
+            player.currentState.EnterState();
         }
-    }
-
-    public override void SwitchState(StateManager player, BaseState newState)
-    {
-        player.currentState.ExitState(player);
-        player.currentState = newState;
-        player.currentState.EnterState(player);
     }
 }

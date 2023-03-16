@@ -6,11 +6,12 @@ using UnityEngine.InputSystem.XR;
 
 public class BaseState
 {
-    public virtual void EnterState(StateManager player) { }
+    public StateManager player;
+    public virtual void EnterState() { }
 
-    public virtual void UpdateState(StateManager player) { }
+    public virtual void UpdateState() { }
 
-    public virtual void SwitchState(StateManager player, BaseState state) { }
+    public virtual void SwitchState() { }
 
-    public virtual void ExitState(StateManager player) { }
+    public virtual void ExitState() { }
 }
