@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
-public abstract class BaseState
+public class BaseState
 {
     public virtual void EnterState(StateManager player) { }
 
     public virtual void UpdateState(StateManager player) { }
+
+    public virtual void SwitchState(StateManager player, BaseState state) { }
+
+    public virtual void ExitState(StateManager player) { }
 }

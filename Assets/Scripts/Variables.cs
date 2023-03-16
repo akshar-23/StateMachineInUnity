@@ -1,28 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Scripting;
 
-public class Variables : MonoBehaviour
+[Preserve]
+public static class Variables
 {
-    public float moveSpeed = 5f;
-    public float sprintSpeed = 10f;
-    public float gravity = -9.81f;
-    public float jumpHeight = 1.5f;
-    public float slideDuration = 0.25f;
-    public float verticalVelocity;
-    public Vector3 movementDirection;
-    public float jumpVelocity;
-    public float slideTime = 0.25f;
-    public float slideStartTime;
-    public Vector3 slideDirection;
-
-
-    public CharacterController controller;
-    public InputControls controls;
-
-    public InputAction movementAction;
-    public InputAction sprintAction;
-    public InputAction jumpAction;
-    public InputAction crouchAction;
-
-    public InputControls.PlayerActions player;
+    public static float moveSpeed = 5f;
+    public static float sprintSpeed = 10f;
+    public static float gravity = -9.81f;
+    public static float jumpHeight = 1.5f;
+    public static float slideTime = 0.25f;
+    public static Vector3 slideDirection;
+    public static Vector3 movementDirection;
+    public static float verticalVelocity;
+    public static float jumpVelocity;
+    public static float slideStartTime;
+    public static CharacterController controller;
+    public static InputControls controls;
+    public static InputAction movementAction;
+    public static InputAction sprintAction;
+    public static InputAction jumpAction;
+    public static InputAction crouchAction;
+    public static InputControls.PlayerActions player;
 }

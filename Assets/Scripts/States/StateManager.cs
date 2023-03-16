@@ -5,9 +5,8 @@ using UnityEngine.InputSystem;
 
 public class StateManager : MonoBehaviour
 {
-    public Variables var;
 
-    BaseState currentState;
+    public BaseState currentState;
     public WalkState walkState = new WalkState();
     public IdleState idleState = new IdleState();
     public SprintState sprintState = new SprintState();
@@ -24,28 +23,26 @@ public class StateManager : MonoBehaviour
     void Start()
     {
         currentState = idleState;
-        var.controller = GetComponent<CharacterController>();
+        Variables.controller = GetComponent<CharacterController>();
+        
+        
         currentState.EnterState(this);
-        var.controls = new InputControls();
-        var.controls.Enable();
+        
+        
+        Variables.controls = new InputControls();
+        Variables.controls.Enable();
 
 
 
-        var.movementAction = var.controls.Player.Movement;
-        var.sprintAction = var.controls.Player.Sprint;
-        var.jumpAction = var.controls.Player.Jump;
-        var.crouchAction = var.controls.Player.Crouch;
+        Variables.movementAction = Variables.controls.Player.Movement;
+        Variables.sprintAction = Variables.controls.Player.Sprint;
+        Variables.jumpAction = Variables.controls.Player.Jump;
+        Variables.crouchAction = Variables.controls.Player.Crouch;
     }
 
     // Update is called once per frame
     void Update()
     {
         currentState.UpdateState(this);
-    }
-
-    public void SwitchState(BaseState state)
-    {
-        currentState = state;
-        state.EnterState(this);
     }
 }

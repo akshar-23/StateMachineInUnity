@@ -467,11 +467,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 974425781}
-  - component: {fileID: 974425782}
   - component: {fileID: 974425783}
-  - component: {fileID: 974425784}
-  - component: {fileID: 974425785}
   - component: {fileID: 974425786}
+  - component: {fileID: 974425787}
+  - component: {fileID: 974425785}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -487,7 +486,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974425780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.53, z: 0}
+  m_LocalPosition: {x: 0, y: 3.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -495,19 +494,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &974425782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974425780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 412cbc57db4d3cc4594d148fc07c817c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  var: {fileID: 974425786}
 --- !u!114 &974425783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,19 +509,6 @@ MonoBehaviour:
   cam: {fileID: 1420864462}
   xSens: 30
   ySens: 30
---- !u!114 &974425784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974425780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 852c92b0ed9e9344ea6b360b70dfa624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  var: {fileID: 974425786}
 --- !u!143 &974425785
 CharacterController:
   m_ObjectHideFlags: 0
@@ -563,57 +536,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 974425780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b93502140d9005448cf806fa8eb46a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 412cbc57db4d3cc4594d148fc07c817c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  sprintSpeed: 10
-  gravity: -9.81
-  jumpHeight: 1.5
-  slideDuration: 0.25
-  verticalVelocity: 0
-  movementDirection: {x: 0, y: 0, z: 0}
-  jumpVelocity: 0
-  slideTime: 0.25
-  slideStartTime: 0
-  slideDirection: {x: 0, y: 0, z: 0}
-  controller: {fileID: 974425785}
-  movementAction:
-    m_Name: Movement
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 34343331-8870-4db8-938c-0a4d78f846c8
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  sprintAction:
-    m_Name: Sprint
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 03bf3bb1-7abe-4f6d-8ad3-d115a2475d49
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  jumpAction:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 209a7a5b-a2c0-475d-96c8-4ffb454d0b45
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  crouchAction:
-    m_Name: Crouch
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: e805d054-ad6a-4674-b8fa-24d932c6c0ed
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+--- !u!114 &974425787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974425780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852c92b0ed9e9344ea6b360b70dfa624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1028513131
 GameObject:
   m_ObjectHideFlags: 0

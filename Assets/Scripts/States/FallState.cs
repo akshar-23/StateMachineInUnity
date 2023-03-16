@@ -8,36 +8,43 @@ public class FallState : BaseState
     {
         Debug.Log("Fall State Entered!");
 
-        player.var.movementDirection = new Vector3(player.var.movementAction.ReadValue<Vector2>().x, 0, player.var.movementAction.ReadValue<Vector2>().y).normalized * player.var.moveSpeed;
+        Variables.movementDirection = new Vector3(Variables.movementAction.ReadValue<Vector2>().x, 0, Variables.movementAction.ReadValue<Vector2>().y).normalized * Variables.moveSpeed;
 
-        player.var.controller.Move(player.transform.TransformDirection(player.var.movementDirection) * Time.deltaTime);
+        Variables.controller.Move(player.transform.TransformDirection(Variables.movementDirection) * Time.deltaTime);
     }
 
     public override void UpdateState(StateManager player)
     {
         // apply gravity to the player
-        player.var.movementDirection.y += player.var.gravity * Time.deltaTime;
+        Variables.movementDirection.y += Variables.gravity * Time.deltaTime;
 
         // move the player based on the current jump velocity
-        Vector3 movement = player.var.movementDirection * Time.deltaTime;
-        player.var.controller.Move(player.transform.TransformDirection(movement));
+        Vector3 movement = Variables.movementDirection * Time.deltaTime;
+        Variables.controller.Move(player.transform.TransformDirection(movement));
 
 
-        if (player.var.controller.isGrounded && player.var.verticalVelocity < 0f)
+        if (Variables.controller.isGrounded && Variables.verticalVelocity < 0f)
         {
-            player.var.verticalVelocity = 0f;
+            Variables.verticalVelocity = 0f;
         }
 
         // switch the state to walking state if wasd movement detected
-        if (player.var.movementAction.ReadValue<Vector2>().magnitude > 0 && player.var.controller.isGrounded)
+        if (Variables.movementAction.ReadValue<Vector2>().magnitude > 0 && Variables.controller.isGrounded)
         {
-            player.SwitchState(player.walkState);
+            SwitchState(player, player.walkState);
         }
 
         // switch the state to idle state if wasd movement not detected
-        if (player.var.movementAction.ReadValue<Vector2>().magnitude <= 0f && player.var.controller.isGrounded)
+        if (Variables.movementAction.ReadValue<Vector2>().magnitude <= 0f && Variables.controller.isGrounded)
         {
-            player.SwitchState(player.idleState);
+            SwitchState(player, player.idleState);
         }
+    }
+
+    public override void SwitchState(StateManager player, BaseState newState)
+    {
+        player.currentState.ExitState(player);
+        player.currentState = newState;
+        player.currentState.EnterState(player);
     }
 }

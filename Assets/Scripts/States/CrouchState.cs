@@ -12,39 +12,46 @@ public class CrouchState : BaseState
 
     public override void UpdateState(StateManager player)
     {
-        Vector2 movementInput = player.var.movementAction.ReadValue<Vector2>();
+        Vector2 movementInput = Variables.movementAction.ReadValue<Vector2>();
 
-        player.var.verticalVelocity += player.var.gravity * Time.deltaTime;
+        Variables.verticalVelocity += Variables.gravity * Time.deltaTime;
 
-        Vector3 movement = new Vector3(movementInput.x, player.var.verticalVelocity * Time.deltaTime, movementInput.y).normalized * player.var.moveSpeed * Time.deltaTime;
-        player.var.controller.Move(player.transform.TransformDirection(movement));
+        Vector3 movement = new Vector3(movementInput.x, Variables.verticalVelocity * Time.deltaTime, movementInput.y).normalized * Variables.moveSpeed * Time.deltaTime;
+        Variables.controller.Move(player.transform.TransformDirection(movement));
 
-        if (player.var.controller.isGrounded && player.var.verticalVelocity < 0f)
+        if (Variables.controller.isGrounded && Variables.verticalVelocity < 0f)
         {
-            player.var.verticalVelocity = 0f;
+            Variables.verticalVelocity = 0f;
         }
 
-        if (player.var.crouchAction.ReadValue<float>() <= 0)
+        if (Variables.crouchAction.ReadValue<float>() <= 0)
         {
             player.transform.localScale = Vector3.one;
 
             // switch to idle state
-            if (movementInput.magnitude <= 0f && player.var.controller.isGrounded)
+            if (movementInput.magnitude <= 0f && Variables.controller.isGrounded)
             {
-                player.SwitchState(player.idleState);
+                SwitchState(player, player.idleState);
             }
 
             // switch to walk state
-            if (player.var.movementAction.ReadValue<Vector2>().magnitude > 0 && player.var.controller.isGrounded)
+            if (Variables.movementAction.ReadValue<Vector2>().magnitude > 0 && Variables.controller.isGrounded)
             {
-                player.SwitchState(player.walkState);
+                SwitchState(player, player.walkState);
             }
 
             // switch to fall state
-            if (!(player.var.jumpAction.triggered) && !player.var.controller.isGrounded)
+            if (!(Variables.jumpAction.triggered) && !Variables.controller.isGrounded)
             {
-                player.SwitchState(player.fallState);
+                SwitchState(player, player.fallState);
             }
         }
+    }
+
+    public override void SwitchState(StateManager player, BaseState newState)
+    {
+        player.currentState.ExitState(player);
+        player.currentState = newState;
+        player.currentState.EnterState(player);
     }
 }
