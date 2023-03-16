@@ -22,4 +22,7 @@ public static class Variables
     public static InputAction jumpAction;
     public static InputAction crouchAction;
     public static InputControls.PlayerActions player;
+    public static float xRotation = 0f;
+    public static float xSens = 30f;
+    public static float ySens = 30f;
 }
